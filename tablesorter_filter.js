@@ -180,6 +180,12 @@
             // TODO: throw error for non-existing filter container?
             if(container.length)
               container[0].filterIndex = i;
+
+            // added to handle select input filter
+            container.change(function() {
+              checkInputBox(this, true);
+            });
+
             container.keyup(function(e, phrase) {
               var index = this.filterIndex;
               if(undefined !== phrase)
@@ -218,7 +224,7 @@
                   // Support entering the same filter text after clearing
                   container[0].lastValue = "";
                   // TODO: Clear single filter only
-                  doFilter(table);
+                  clearFilter(table);
                   if(container[0].type != 'hidden')
                     container.focus();
                 });
